@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/deploymentTemplate.json#"
     "contentVersion": "1.0.0.0",
     "parameters": {
         "rgName": {
@@ -26,14 +26,7 @@
         "powerPlatformAccountsName": "[take(concat(parameters('rgName'), '-', 'PP', '-', parameters('location')), 64)]",
         "ppAccountsDescription": "Dedicated billing subscription for Power Platform tenant for North Star Architecture"
     },
-    "resources": [
-        {
-            "type": "Microsoft.Resources/resourceGroups",
-            "apiVersion": "2021-04-01",
-            "name": "[parameters('rgName')]",
-            "location": "[parameters('location')]",
-            "properties": {}
-        },
+    "resources": [        
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
