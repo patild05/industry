@@ -4,7 +4,7 @@
     and the initial Admin environments for Power Platform, to construct and operationalize landing zones for citizen - and professional developers.
 */
 {
-    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "ppIdentity": {
@@ -616,9 +616,9 @@
         },
         "resourceNamePrefix": "PPLZ",
         "rgNames": {
-            "mgmtRg": "[concat(variables('resourceNamePrefix'), '-mgmt-', parameters('location'))]",
-            "billingRg": "[concat(variables('resourceNamePrefix'), '-billing-', parameters('location'))]",
-            "analyticsRg": "[concat(variables('resourceNamePrefix'), '-analytics-', parameters('location'))]"
+            "mgmtRg": "RG-AM-App-PowerPlatformPoc-001",
+            "billingRg": "RG-AM-App-PowerPlatformPoc-001",
+            "analyticsRg": "RG-AM-App-PowerPlatformPoc-001"
             },
         // Declaring deterministic names for platform resources that will be created
         "resourceNames": {
@@ -826,7 +826,7 @@
         },
         {
             // Register the Power Platform 'accounts' resource type if the condition is met, and create the billing object into a new resource group.
-            "condition": "[equals(parameters('ppAdminBilling'), 'yes')]",
+            "condition": "[equals(parameters('ppAdminBilling'), 'dipak')]",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-10-01",
             "name": "[variables('deploymentNames').ppRegistrationDeploymentName]",
@@ -852,7 +852,7 @@
         },
         {
             // Create Azure Monitor infrastructure for security and observability
-            "condition": "[equals(parameters('ppEnableAzureMonitor'), 'yes')]",
+            "condition": "[equals(parameters('ppEnableAzureMonitor'), 'dipak')]",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-10-01",
             "name": "[variables('deploymentNames').logAnalyticsDeploymentName]",
@@ -889,7 +889,7 @@
             }
         },
         {
-            "condition": "[and(equals(parameters('ppEnableAzureMonitor'), 'yes'), equals(parameters('ppEnableAzureSecurity'), 'yes'))]",
+            "condition": "[and(equals(parameters('ppEnableAzureMonitor'), 'dipak'), equals(parameters('ppEnableAzureSecurity'), 'yes'))]",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-10-01",
             "name": "[variables('deploymentNames').securityDeploymentName]",
@@ -923,7 +923,7 @@
             }            
         },
         {
-            "condition": "[and(equals(parameters('ppEnableAzureMonitor'), 'yes'), equals(parameters('ppEnableAadLogs'), 'yes'))]",
+            "condition": "[and(equals(parameters('ppEnableAzureMonitor'), 'dipak'), equals(parameters('ppEnableAadLogs'), 'yes'))]",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-10-01",
             "name": "[variables('deploymentNames').aadDiagnosticsDeploymentName]",
